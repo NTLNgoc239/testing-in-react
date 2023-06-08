@@ -22,4 +22,11 @@ it("getPeople returns counts and results", () => {
       })
     })
   );
+  expect.assertions(4);
+  return swapi.getPeoplePromise(mockFetch).then(data => {
+    expect(mockFetch.mock.calls.length).toBe(1);
+    expect(mockFetch).toBeCalledWith('https://swapi.py4e.com/api/planets/');
+    expect(data.count).toBe(61);
+    expect(data.results.length).toBeGreaterThan(5);
+  })
 });
